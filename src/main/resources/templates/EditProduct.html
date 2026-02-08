@@ -9,7 +9,7 @@
     <div class="container">
         <h3>Edit Product</h3>
 
-        <form th:action="@{${product.productId} != null ? '/product/update' : '/product/create'}" th:object="${product}" method="post">
+        <form th:action="@{${product.productId} ne null ? '/product/update' : '/product/create'}" th:object="${product}" method="post">
         <input type="hidden" th:field="*{productId}"/>
 
             <div class="form-group">
