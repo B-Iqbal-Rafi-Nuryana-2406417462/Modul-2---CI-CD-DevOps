@@ -64,7 +64,69 @@ public class ProductRepositoryTest {
         Product savedProduct = productIterator.next();
         assertEquals(product1.getProductId(),savedProduct.getProductId());
         savedProduct = productIterator.next();
-        assertEquals(product1.getProductId(), savedProduct.getProductId());
+        assertEquals(product2.getProductId(), savedProduct.getProductId());
         assertFalse(productIterator.hasNext());
+    }
+
+    @Test
+    void testFindByIdFound() {
+        Product product = new Product();
+        product.setProductId("P001");
+        product.setProductName("Sabun Cuci Piring");
+        product.setProductQuantity(75);
+        productRepository.create(product);
+
+        Product foundProduct = productRepository.findById("P001");
+        assertNotNull(foundProduct);
+        assertEquals("P001", foundProduct.getProductId());
+        assertEquals("Sabun Cuci Piring", foundProduct.getProductName());
+        assertEquals(75, foundProduct.getProductQuantity());
+    }
+
+    @Test
+    void testFindByIdNotFound() {
+        Product product = new Product();
+        product.setProductId("P001");
+        product.setProductName("Sabun Cuci Piring");
+        product.setProductQuantity(75);
+        productRepository.create(product);
+
+        Product foundProduct = productRepository.findById("P999");
+        assertNull(foundProduct);
+    }
+
+    @Test
+    void testEditExistingProduct_ShouldUpdateSuccessfully() {
+        Product product = new Product();
+        product.setProductId("P001");
+        product.setProductName("Sabun Cuci Piring");
+        product.setProductQuantity(75);
+        productRepository.create(product);
+
+        Product updatedProduct = new Product();
+        updatedProduct.setProductId("P001");
+        updatedProduct.setProductName("Sabun Cuci Piring Ultra");
+        updatedProduct.setProductQuantity(100);
+
+        Product savedProduct = productRepository.save(updatedProduct);
+        assertNotNull(savedProduct);
+        assertEquals("Sabun Cuci Piring Ultra", savedProduct.getProductName());
+        assertEquals(100, savedProduct.getProductQuantity());
+
+        Product foundProduct = productRepository.findById("P001");
+        assertEquals("Sabun Cuci Piring Ultra", foundProduct.getProductName());
+        assertEquals(100, foundProduct.getProductQuantity());
+    }
+
+    @Test
+    void testDeletingProduct_ShouldReturnNull() {
+        Product product = new Product();
+        ProductRepository productRepository = new ProductRepository();
+        product.setProductId("P999");
+        product.setProductName("Produk Tidak Ada");
+        product.setProductQuantity(10);
+        productRepository.save(product);
+        productRepository.deleteProduct(product.getProductId());
+        assertNull(productRepository.findById("P999"));
     }
 }
