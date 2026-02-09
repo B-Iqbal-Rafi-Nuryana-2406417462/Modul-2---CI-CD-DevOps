@@ -8,10 +8,10 @@ group = 'id.ac.ui.cd.advprog'
 version = '0.0.1-SNAPSHOT'
 description = 'eshop'
 
-val seleniumJavaVersion = "4.14.1"
-val seleniumJupiterVersion = "5.0.1"
-val webDriverManagerVersion = "5.6.3"
-val junitJupiterVersion = "5.9.1"
+def seleniumJavaVersion = "4.14.1"
+def seleniumJupiterVersion = "5.0.1"
+def webDriverManagerVersion = "5.6.3"
+def junitJupiterVersion = "5.9.1"
 
 java {
     toolchain {
@@ -45,7 +45,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion")
 }
 
-tasks.register<Test>("unitTest"){
+tasks.register("unitTest", Test){
     description = "Run unit tests"
     group = "verification"
 
@@ -54,7 +54,7 @@ tasks.register<Test>("unitTest"){
     }
 }
 
-tasks.register<Test>("functionalTest"){
+tasks.register("functionalTest", Test){
     description = "Run functional tests"
     group = "verification"
 
@@ -63,7 +63,7 @@ tasks.register<Test>("functionalTest"){
     }
 }
 
-tasks.withType<Test>().configureEach {
+tasks.withType(Test).configureEach {
     useJUnitPlatform()
 }
 
