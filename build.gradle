@@ -11,7 +11,6 @@ description = 'eshop'
 def seleniumJavaVersion = "4.14.1"
 def seleniumJupiterVersion = "5.0.1"
 def webDriverManagerVersion = "5.6.3"
-def junitJupiterVersion = "5.9.1"
 
 java {
     toolchain {
@@ -41,8 +40,6 @@ dependencies {
     testImplementation("org.seleniumhq.selenium:selenium-java:$seleniumJavaVersion")
     testImplementation("io.github.bonigarcia:selenium-jupiter:$seleniumJupiterVersion")
     testImplementation("io.github.bonigarcia:webdrivermanager:$webDriverManagerVersion")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion")
-    testImplementation("org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion")
 }
 
 tasks.register("unitTest", Test){
