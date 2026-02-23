@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.Iterator;
 
@@ -119,14 +118,44 @@ public class ProductRepositoryTest {
     }
 
     @Test
-    void testDeletingProduct_ShouldReturnNull() {
+    void testEditMissingProduct_ShouldReturnNull() {
+        Product updatedProduct = new Product();
+        updatedProduct.setProductId("P404");
+        updatedProduct.setProductName("Produk Tidak Ada");
+        updatedProduct.setProductQuantity(1);
+
+        Product savedProduct = productRepository.save(updatedProduct);
+
+        assertNull(savedProduct);
+        assertNull(productRepository.findById("P404"));
+    }
+
+    @Test
+    void testDeleteExistingProduct_ShouldRemoveFromRepository() {
         Product product = new Product();
-        ProductRepository productRepository = new ProductRepository();
         product.setProductId("P999");
-        product.setProductName("Produk Tidak Ada");
+        product.setProductName("Produk Percobaan");
         product.setProductQuantity(10);
-        productRepository.save(product);
-        productRepository.deleteProduct(product.getProductId());
+        productRepository.create(product);
+
+        productRepository.deleteProduct("P999");
+
         assertNull(productRepository.findById("P999"));
     }
+
+    @Test
+    void testDeleteMissingProduct_ShouldNotChangeRepository() {
+        Product product = new Product();
+        product.setProductId("P111");
+        product.setProductName("Produk Tetap Ada");
+        product.setProductQuantity(5);
+        productRepository.create(product);
+
+        productRepository.deleteProduct("P999");
+
+        Product stillThere = productRepository.findById("P111");
+        assertNotNull(stillThere);
+        assertEquals("P111", stillThere.getProductId());
+    }
+
 }
