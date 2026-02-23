@@ -33,7 +33,7 @@ repositories {
 sonarqube {
     properties {
         property "sonar.projectKey", "B-Iqbal-Rafi-Nuryana-2406417462_Modul-2---CI-CD-DevOps"
-        property "sonar.organization", "B-Iqbal Rafi Nuryana-2406417462"
+        property "sonar.organization", "b-iqbal-rafi-nuryana-2406417462"
         property "sonar.host.url", "https://sonarcloud.io"
     }
 }
