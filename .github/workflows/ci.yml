@@ -29,7 +29,11 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
-      - name: Build, test, and SonarCloud analysis
-        run: ./gradlew build sonar -Dsonar.qualitygate.wait=true --warning-mode all
+      - name: Build and test
+        run: ./gradlew build --warning-mode all
+
+      - name: SonarCloud analysis
+        if: ${{ secrets.SONAR_TOKEN != '' }}
+        run: ./gradlew sonar -Dsonar.qualitygate.wait=true --warning-mode all
         env:
-            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
