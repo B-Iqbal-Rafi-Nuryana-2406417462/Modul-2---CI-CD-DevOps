@@ -71,7 +71,7 @@ class ProductControllerTest {
     void editProductPage_ShouldReturnEditViewWithProduct() throws Exception {
         mockMvc.perform(get("/product/edit/" + createdProductId))
                 .andExpect(status().isOk())
-                .andExpect(view().name("EditProduct"))
+                .andExpect(view().name("editProduct"))
                 .andExpect(model().attributeExists("product"));
     }
 
