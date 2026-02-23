@@ -35,5 +35,4 @@ jobs:
       - name: SonarCloud analysis
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        if: ${{ env.SONAR_TOKEN != '' }}
         run: ./gradlew sonar -Dsonar.qualitygate.wait=true --warning-mode all
