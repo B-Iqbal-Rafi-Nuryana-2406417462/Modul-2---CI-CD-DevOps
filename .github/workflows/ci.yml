@@ -19,7 +19,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set ip Java toolchain
+      - name: Set up Java toolchain
         uses: actions/setup-java@v4
         with:
             distribution: 'temurin'
@@ -37,8 +37,9 @@ jobs:
         id: pmd
         with:
           rulesets: 'ruleset.xml'
+          sourcePath: 'src/main/java'
 
       - name: Fail build if there are violations
-        if: steps.pmd.outputs.violations != 0
+        if: steps.pmd.outputs.violations != '0'
         run: exit 1
 
