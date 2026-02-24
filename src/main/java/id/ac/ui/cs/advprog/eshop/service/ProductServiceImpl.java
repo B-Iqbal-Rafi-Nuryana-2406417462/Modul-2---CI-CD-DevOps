@@ -16,8 +16,10 @@ public class ProductServiceImpl implements ProductService{
     @Autowired
     private ProductRepository productRepository;
 
+    public ProductServiceImpl() {}
+
     @Override
-    public Product create(Product product){
+    public Product create(final Product product){
         product.setProductId(UUID.randomUUID().toString());
         productRepository.create(product);
         return product;
@@ -25,25 +27,25 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public List<Product> findAll(){
-        Iterator<Product> productIterator = productRepository.findAll();
-        List<Product> allProduct = new ArrayList<>();
+        final Iterator<Product> productIterator = productRepository.findAll();
+        final List<Product> allProduct = new ArrayList<>();
         productIterator.forEachRemaining(allProduct::add);
         return allProduct;
     }
 
     @Override
-    public Product findById(String productId){
+    public Product findById(final String productId){
         return productRepository.findById(productId);
     }
 
     @Override
-    public Product updateProduct(Product product) {
+    public Product updateProduct(final Product product) {
         productRepository.save(product);
         return product;
     }
 
     @Override
-    public void deleteProduct(String productId){
+    public void deleteProduct(final String productId){
         productRepository.deleteProduct(productId);
     }
 }

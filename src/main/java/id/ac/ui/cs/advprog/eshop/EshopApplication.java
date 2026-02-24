@@ -6,7 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class EshopApplication {
 
-	public static void main(String[] args) {
+	private EshopApplication() {}
+
+	public static void main(final String[] args) {
 		SpringApplication.run(EshopApplication.class, args);
 	}
 
