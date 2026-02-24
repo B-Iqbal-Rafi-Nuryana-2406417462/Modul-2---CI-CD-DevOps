@@ -33,13 +33,5 @@ jobs:
         run: ./gradlew build
 
       - name: PMD static analysis
-        uses: pmd/pmd-github-action@v2
-        id: pmd
-        with:
-          rulesets: 'ruleset.xml'
-          sourcePath: 'src/main/java'
-
-      - name: Fail build if there are violations
-        if: steps.pmd.outputs.violations != '0'
-        run: exit 1
+        run: ./gradlew pmdMain pmdTest
 
