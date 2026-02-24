@@ -29,7 +29,16 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
-      - name: Build, test, and sonar analyze
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./gradlew build sonar -Dsonar.qualitygate.wait=true --warning-mode all
+      - name: Build, test
+        run: ./gradlew build
+
+      - name: PMD static analysis
+        uses: pmd/pmd-github-action@v2
+        id: pmd
+        with:
+          rulesets: 'ruleset.xml'
+
+      - name: Fail build if there are violations
+        if: steps.pmd.outputs.violations != 0
+        run: exit 1
+
