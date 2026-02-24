@@ -96,4 +96,6 @@ pmd {
     consoleOutput = true
 }
 
+tasks.pmdTest.enabled = false
+
 

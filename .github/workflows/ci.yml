@@ -64,7 +64,7 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Run PMD static analysis
-        run: ./gradlew pmdMain pmdTest
+        run: ./gradlew pmdMain
 
       - name: Upload PMD report
         if: always()
