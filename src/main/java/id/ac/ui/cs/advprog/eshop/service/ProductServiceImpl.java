@@ -16,6 +16,7 @@ public class ProductServiceImpl implements ProductService{
     @Autowired
     private ProductRepository productRepository;
 
+    public ProductServiceImpl() {}
 
     @Override
     public Product create(final Product product){
