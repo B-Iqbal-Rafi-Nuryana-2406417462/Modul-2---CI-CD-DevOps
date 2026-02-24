@@ -11,6 +11,7 @@ import java.util.List;
 public class ProductRepository {
     private final List<Product> productData = new ArrayList<>();
 
+    public ProductRepository() {}
 
     public Product create(final Product product){
         productData.add(product);
