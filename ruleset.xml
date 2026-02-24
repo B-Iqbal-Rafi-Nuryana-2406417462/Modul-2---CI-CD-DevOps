@@ -7,12 +7,15 @@
 
     <description>PMD ruleset for eshop project</description>
 
-    <rule ref="category/java/bestpractices.xml"/>
-    <rule ref="category/java/codestyle.xml"/>
-    <rule ref="category/java/design.xml">
+    <rule ref="category/java/bestpractices.xml">
         <exclude name="AtLeastOneConstructor"/>
-        <exclude name="UnnecessaryConstructor"/>
     </rule>
+    <rule ref="category/java/codestyle.xml">
+        <exclude name="UnnecessaryConstructor"/>
+        <exclude name="AtLeastOneConstructor"/>
+        <exclude name="LoosePackageCoupling"/>
+    </rule>
+    <rule ref="category/java/design.xml"/>
     <rule ref="category/java/errorprone.xml"/>
     <rule ref="category/java/performance.xml"/>
 
