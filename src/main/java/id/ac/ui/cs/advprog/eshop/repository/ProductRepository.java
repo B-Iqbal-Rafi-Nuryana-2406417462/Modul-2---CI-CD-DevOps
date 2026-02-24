@@ -9,9 +9,10 @@ import java.util.List;
 
 @Repository
 public class ProductRepository {
-    private List<Product> productData = new ArrayList<>();
+    private final List<Product> productData = new ArrayList<>();
 
-    public Product create(Product product){
+
+    public Product create(final Product product){
         productData.add(product);
         return product;
     }
@@ -20,27 +21,30 @@ public class ProductRepository {
         return productData.iterator();
     }
 
-    public Product findById(String productId){
-        for (Product product : productData){
+    public Product findById(final String productId){
+        Product result = null;
+        for (final Product product : productData){
             if (product.getProductId().equals(productId)){
-                return product;
+                result = product;
+                break;
             }
         }
-        return null;
+        return result;
     }
 
-    public Product save(Product product){
-        Product existingProduct = findById(product.getProductId());
+    public Product save(final Product product){
+        final Product existingProduct = findById(product.getProductId());
+        Product result = null;
         if (existingProduct != null){
-            int indexOfExistingProduct = productData.indexOf(existingProduct);
-            productData.set(indexOfExistingProduct, product);
-            return product;
+            final int idx = productData.indexOf(existingProduct);
+            productData.set(idx, product);
+            result = product;
         }
-        return null;
+        return result;
     }
 
-    public void deleteProduct(String productId){
-        Product productToDelete = findById(productId);
+    public void deleteProduct(final String productId){
+        final Product productToDelete = findById(productId);
         if (productToDelete != null){
             productData.remove(productToDelete);
         }
